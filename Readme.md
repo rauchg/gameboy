@@ -20,7 +20,7 @@ Changes:
 
 ## How to use
 
-```
+```js
 var gb = require('gameboy');
 gb(canvasElement, romData, opts);
 ```

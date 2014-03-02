@@ -16,6 +16,7 @@ Changes:
 - Removed unneeded dependencies.
 - Main interface turned into an `Emitter`.
 - Incorporated [debug](https://github.com/visionmedia/debug).
+- Added server-side usage examples
 
 ## How to use
 

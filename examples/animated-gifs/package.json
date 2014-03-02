@@ -1,0 +1,13 @@
+{
+  "name": "animated-gifs",
+  "version": "0.0.1",
+  "description": "generates an animated gif from an emulation",
+  "dependencies": {
+    "minimist": "0.0.8",
+    "gifencoder": "1.0.3",
+    "canvas": "1.1.3"
+  },
+  "bin": {
+    "emuanimate": "./emuanimate"
+  }
+}

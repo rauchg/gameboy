@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+var argv = require('minimist')(process.argv.slice(2));
+var encode = require('./');
+var join = require('path').join;
+var fs = require('fs');
+
+var file = argv._[0];
+var out = argv._[1];
+if (!file || !out) help();
+
+if ('/' != file[0]) file = join(process.cwd(), file);
+if ('/' != out[0]) out = join(process.cwd(), out);
+
+try {
+  var rom = fs.readFileSync(file);
+} catch(e){
+  console.error(e);
+  invalid();
+}
+
+function help(){
+  console.log('usage: animate [-f frames] [-l interval] [-w width]\n'
+    + ' [-h height] <romfile> <out>');
+  console.log('');
+  console.log('  f : number of frames to capture (300)');
+  console.log('  l : emulator loop interval (8)');
+  console.log('  w : width of gif (160)');
+  console.log('  h : height of gif (144)');
+  console.log('');
+  process.exit(1);
+}
+
+function invalid(){
+  console.error('Please supply a valid ROM file.');
+  process.exit(1);
+}
+
+var enc = encode(rom, {
+  width: argv.w,
+  height: argv.h,
+  loop: argv.l,
+  frames: argv.f
+});
+
+enc.createReadStream().pipe(fs.createWriteStream(out));

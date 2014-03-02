@@ -1,0 +1,10 @@
+{
+  "name": "gameboy",
+  "version": "0.0.1",
+  "description": "gameboy emulator by grantgalitz",
+  "dependencies": {
+    "emitter": "http://github.com/component/emitter/archive/1.0.1.tar.gz",
+    "debug": "0.7.4",
+    "canvas": "1.1.3"
+  }
+}

@@ -4564,7 +4564,7 @@ GameBoyCore.prototype.initSkipBootstrap = function () {
   this.channel4lastSampleLookup = 0;
   this.VinLeftChannelMasterVolume = 8;
   this.VinRightChannelMasterVolume = 8;
-  this.soundMasterEnabled = true;
+  this.soundMasterEnabled = !!this.opts.sound;
   this.leftChannel1 = true;
   this.leftChannel2 = true;
   this.leftChannel3 = true;
@@ -4764,7 +4764,7 @@ GameBoyCore.prototype.interpretCartridge = function () {
         this.gameCode += String.fromCharCode(this.ROMImage[index]);
       }
     }
-    
+
     extra = String.fromCharCode(this.ROMImage[0x143]);
   }
 
@@ -6486,7 +6486,7 @@ GameBoyCore.prototype.initializeReferencesFromSaveState = function () {
       this.OBJPalette = this.gbOBJColorizedPalette;
       this.updateGBBGPalette = this.updateGBColorizedBGPalette;
       this.updateGBOBJPalette = this.updateGBColorizedOBJPalette;
-      
+
     }
     else {
       this.BGPalette = this.gbBGPalette;
@@ -7651,7 +7651,7 @@ GameBoyCore.prototype.memoryReadJumpCompile = function () {
             parentObj.memory[0xFF04] = (parentObj.memory[0xFF04] + (parentObj.DIVTicks >> 8)) & 0xFF;
             parentObj.DIVTicks &= 0xFF;
             return parentObj.memory[0xFF04];
-            
+
           };
           break;
         case 0xFF05:
@@ -9018,7 +9018,7 @@ GameBoyCore.prototype.registerWriteJumpCompile = function () {
   //NR52:
   this.memoryHighWriter[0x26] = this.memoryWriter[0xFF26] = function (parentObj, address, data) {
     parentObj.audioJIT();
-    if (!parentObj.soundMasterEnabled && data > 0x7F) {
+    if (parentObj.soundMasterEnabled && data > 0x7F) {
       parentObj.memory[0xFF26] = 0x80;
       parentObj.soundMasterEnabled = true;
       parentObj.initializeAudioStartState();

@@ -31,6 +31,7 @@ function GameBoyCore(canvas, ROMImage, opts) {
   this.opts.interval = opts.interval || 8;
   this.opts.imageSmoothing = false !== opts.imageSmoothing;
   this.opts.sound = opts.sound;
+  this.opts.soundEnabled = opts.soundEnabled;
   this.opts.volume = opts.volume || 1;
   this.opts.audioBufferMin = opts.audioBufferMin || 10;
   this.opts.audioBufferMax = opts.audioBufferMax || 20;
@@ -4564,7 +4565,7 @@ GameBoyCore.prototype.initSkipBootstrap = function () {
   this.channel4lastSampleLookup = 0;
   this.VinLeftChannelMasterVolume = 8;
   this.VinRightChannelMasterVolume = 8;
-  this.soundMasterEnabled = !!this.opts.sound;
+  this.soundMasterEnabled = this.opts.soundEnabled;
   this.leftChannel1 = true;
   this.leftChannel2 = true;
   this.leftChannel3 = true;
